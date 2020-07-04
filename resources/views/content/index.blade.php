@@ -7,35 +7,37 @@
     <thead>
         <tr>
             <th scope="col">No</th>
-            <th scope="col">Judul</th>
             <th scope="col">Isi</th>
-            <th scope="col">Tanggal Dibuat</th>
-            <th scope="col">Tanggal Diperbaharui</th>
-            <th scope="col">VoteS</th>
-            <th scope="col">Like</th>
-            <th scope="col">Dislike</th>
-            <th scope="col">Action</th>
-            
- 
+            <th scope="col">Aksi</th>
+            <th scope="col">Jawaban</th>
         </tr>
     </thead>
     <tbody>
         @foreach($items as $item)
         <tr>
             <th scope="row">{{ $loop->iteration }}</th>
-            <td>{{ $item->nama_judul }}</td>
             <td>{{ $item->isi }}</td>
-            <td>{{ $item->tanggal_dibuat }}</td>
-            <td>{{ $item->tanggal_diperbaharui }}</td>
-            <td>{{ $item->vote }}</td>
-            <td>{{ $item->like}}</td>
-            <td>{{ $item->dislike}}</td>
-            <td ><a href="{{url('/jawaban/'.$item->id.'/create')}}"><i class="fas fa-plus"></i></a></th>
-            <td ><a href="{{url('/jawaban/'.$item->id)}}"><i class="far fa-eye"></i></a></th>
+            <td>
+                <div>
+                    <a href="{{url('/pertanyaan/'.$item->id.'/edit')}}"><i class="btn btn-warning fas fa-edit mx-auto"></i></a>
+                    <a href="{{url('/pertanyaan/'.$item->id)}}"><i class="btn btn-success far fa-eye mx-auto"></i></a>
+                    <form action="{{url('/pertanyaan/'.$item->id)}}" method="POST" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger"><i class="far fa-trash-alt mx-auto"></i></i></a>
+                    </form>
+                </div>
+            </td>
+            <td > <div class="">
+                <a href="{{url('/jawaban/'.$item->id.'/create')}}"><i class="btn btn-primary far fa-plus-square mx-auto"></i></i></a>
+                <a href="{{url('/jawaban/'.$item->id)}}"><i class="btn btn-success far fa-eye mx-auto"></i></a>
+                </div>
+            <td >
         </tr>
         @endforeach
         
     </tbody>
 </table>
+
 
 @endsection
